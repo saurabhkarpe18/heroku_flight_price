@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		
+		<!-- CSS property to place div
+			side by side -->
+		<style>
+			#leftbox {
+				float:left;
+				background:deepskyblue;
+				margin-left: 100px;
+				margin-top: 2%;
+				width:40%;
+				height:350px
+				
+			}
+
+			#rightbox{
+				float:right;
+				background:deepskyblue;
+				margin-right: 100px;
+				margin-top: 2%;
+				width:40%;
+				height:350px;
+			}
+
+
+			h1,h2{
+				color:	#505050;
+				text-align:center;
+			}
+
+			h3{
+				text-align:center;
+			}
+
+			#birthdaytime{
+				margin-left: 27%;
+
+			}
+
+			.sel{
+				margin-top: 0.7%;
+				margin-left: 38%;
+			}
+
+			.sel1{
+				margin-top: 0.7%;
+				margin-left: 40%;
+			}
+
+			#st{
+				margin-left: 44%;
+			}
+
+			#air{
+				margin-left: 44%;
+			}
+
+			.con { 
+  				height: 200px;
+  				position: relative;
+  				
+			}
+
+			.cen {
+  				margin-top: 26% ;
+  				position: absolute;
+  				top: 50%;
+  				left: 50%;
+  				-ms-transform: translate(-50%, -50%);
+  				transform: translate(-50%, -50%);
+			}
+
+			button{
+				margin-top: 3% ;
+				margin-left: 30%;
+			}
+
+
+		</style>
+	</head>
+	
+	<body>
+	<form action='/predict' method="post">
+		<div id = "boxes">
+			<h1>Flight Price Prediction</h1>
+			
+			<div id = "leftbox">
+				<h2>Departure time:</h2>
+		<input type="datetime-local" id="birthdaytime" name="deptime">
+
+		<br><br>
+
+				<h2>Arrival time:</h2>
+				<input type="datetime-local" id="birthdaytime" name="arrtime">	
+
+				<br><br>
+
+				<h2>Stops:</h2>
+				<select name='stops' id='st'>
+		    <option value="" disabled="disabled" selected="selected">Stops</option>
+		      {% for st in stops %}
+    		<option value= "{{st}}" >{{st}}</option>
+    			{% endfor %}
+		    </select>
+	</div>
+
+<div id = "rightbox">
+				<h2>Departure Station:</h2>
+				<select name='departure' class='sel'>
+		    <option value="" disabled="disabled" selected="selected">Departure Station</option>
+		      {% for dep in departure %}
+    		<option value= "{{dep}}" >{{dep}}</option>
+    			{% endfor %}
+		    </select>
+
+		    <br><br>
+
+		    <h2>Arrival Station:</h2>
+		    <select name='arrival' class='sel1'>
+		    <option value="" disabled="disabled" selected="selected">Arrival Station</option>
+		      {% for arr in arrival %}
+    		<option value= "{{arr}}" >{{arr}}</option>
+    			{% endfor %}
+		    </select>
+
+		    <br><br>
+
+		    <h2>Airline:</h2>
+		    <select name='airline' id='air'>
+		    <option value="" disabled="disabled" selected="selected">Airline</option>
+		      {% for air in airline %}
+    		<option value= "{{air}}" >{{air}}</option>
+    			{% endfor %}
+		    </select>
+		</div>
+
+		<button type="submit" class="btn btn-secondary btn-lg"   style="width: 530px;
+	background-color: deepskyblue;">Predict</button>
+	</form>
+				<h3>{{ prediction_text }}</h3> 
+
+</div>
+</body>
+</html>
